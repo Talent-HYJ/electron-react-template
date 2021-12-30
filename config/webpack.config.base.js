@@ -30,14 +30,15 @@ module.exports ={
           cacheCompression: false,
           sourceMaps: true,
           inputSourceMap: true,
-          presets: [["@babel/preset-react"],
+          presets: [["@babel/preset-react",{
+            "runtime":'automatic'
+          }],
           ['@babel/preset-env',{
             useBuiltIns:'usage',
             corejs:{
               version:2
             },
           }],['@babel/preset-typescript']],
-          plugins:["@babel/plugin-transform-runtime","@babel/plugin-syntax-jsx"],
         },
       }
     },
