@@ -1,4 +1,5 @@
 const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const path = require('path');
 const lessModuleRegex = /\.module\.less$/;
@@ -79,7 +80,7 @@ module.exports = {
         test: /\.less$/i,
         exclude: lessModuleRegex,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader'
           },
@@ -91,7 +92,7 @@ module.exports = {
       {
         test: lessModuleRegex,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -116,6 +117,11 @@ module.exports = {
     new ESLintPlugin({
       fix: true,
       cache: true
+    }),
+    new MiniCssExtractPlugin({
+      filename: `assets/css/[name].[contenthash:8].css`,
+      chunkFilename: `assets/css/[name].[contenthash:8].chunk.css`, // chunk css file
+      ignoreOrder: true
     }),
     new FriendlyErrorsWebpackPlugin()
   ]
