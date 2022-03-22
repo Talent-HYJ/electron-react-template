@@ -96,6 +96,7 @@ module.exports = {
           }
         ]
       },
+      // less module
       {
         test: lessModuleRegex,
         use: [
