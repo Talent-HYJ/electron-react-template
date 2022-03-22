@@ -1,44 +1,40 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
-const { electron } = require('process');
 
-function createWindow () {
-  console.log('创建主窗口    ' );
+function createWindow() {
+  console.log('创建主窗口    ');
   const win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(app.getAppPath(), 'preload.js'),
+      worldSafeExecuteJavaScript: true,
       nodeIntegration: true,
-      contextIsolation: false,
+      contextIsolation: true,
+      webviewTag: true
     }
-  })
-//   if(isDev){
-//     try {
-//         require('electron-reloader')(module, {});
-//     } catch (_) { }
+  });
 
-// }
-  isDev ?
-  win.loadURL('http://localhost:9000')
-  : win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`)
-win.webContents.openDevTools()
+  isDev
+    ? win.loadURL('http://localhost:9000')
+    : win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`);
+  win.webContents.openDevTools();
+  ipcMain.on('create-view', () => {});
 }
 
 app.whenReady().then(() => {
-  createWindow()
+  createWindow();
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow()
+      createWindow();
     }
-  })
-})
+  });
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    app.quit()
+    app.quit();
   }
-})
-
+});

@@ -11,11 +11,18 @@ module.exports = {
     filename: '[name][contenthash:10].js'
   },
   stats: 'minimal',
-  devtool: 'cheap-source-map',
+  devtool: 'eval-cheap-module-source-map',
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
     mainFields: ['jsnext:main', 'module', 'browser', 'main'],
-    extensions: ['.ts', '.tsx', '.js', '.json', '.less', '.css']
+    extensions: ['.ts', '.tsx', '.js', '.json', '.less', '.css'],
+    alias: {
+      Images: path.resolve(__dirname, '../src/images'),
+      Utils: path.resolve(__dirname, '../src/utils')
+    }
+  },
+  externals: {
+    electron: require('electron')
   },
   module: {
     rules: [
