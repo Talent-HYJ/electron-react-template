@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
-
+const fs = require('fs');
 function createWindow() {
   console.log('创建主窗口    ');
   const win = new BrowserWindow({
@@ -20,7 +20,27 @@ function createWindow() {
     ? win.loadURL('http://localhost:9000')
     : win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`);
   win.webContents.openDevTools();
-  ipcMain.on('create-view', () => {});
+  ipcMain.on('exportPDF', (e, data) => {
+    // 导出pdf方法
+    const pdfWindow = new BrowserWindow({
+      webPreferences: {
+        nodeIntegration: true,
+        webSecurity: false,
+        enableRemoteModule: true
+      },
+      show: false, // 如果不想显示窗口可以改为false
+      width: 800,
+      height: 600,
+      fullscreenable: true,
+      minimizable: false
+    });
+    pdfWindow.loadURL(`data:text/html;charset=utf-8,${encodeURI(data)}`);
+    pdfWindow.webContents.on('did-finish-load', () => {
+      pdfWindow.webContents.printToPDF({}).then((res) => {
+        fs.writeFileSync(path.join(__dirname, '../build/test.pdf'), res);
+      });
+    });
+  });
 }
 
 app.whenReady().then(() => {

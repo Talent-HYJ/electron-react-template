@@ -1,4 +1,7 @@
+import { useEffect } from 'react';
+
 const Nav = () => {
-  return <div> 消息</div>;
+  useEffect(() => {}, []);
+  return <div>消息</div>;
 };
 export default Nav;
