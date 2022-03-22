@@ -6,6 +6,5 @@ contextBridge.exposeInMainWorld('api', {
   exportPDF: (data) => {
     // data 传html字符串模板
     ipcRenderer.send('exportPDF', data);
-  },
-  test: '111'
+  }
 });
