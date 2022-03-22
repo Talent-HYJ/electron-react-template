@@ -3,8 +3,8 @@ contextBridge.exposeInMainWorld('api', {
   createView: () => {
     ipcRenderer.send('create-view');
   },
-  exportPDF: (data) => {
+  exportPDF: (data, fileName) => {
     // data 传html字符串模板
-    ipcRenderer.send('exportPDF', data);
+    ipcRenderer.send('exportPDF', data, fileName);
   }
 });

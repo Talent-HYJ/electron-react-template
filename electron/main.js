@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
 const fs = require('fs');
@@ -20,7 +20,7 @@ function createWindow() {
     ? win.loadURL('http://localhost:9000')
     : win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`);
   win.webContents.openDevTools();
-  ipcMain.on('exportPDF', (e, data) => {
+  ipcMain.on('exportPDF', (e, data, fileName = '未命名.pdf') => {
     // 导出pdf方法
     const pdfWindow = new BrowserWindow({
       webPreferences: {
@@ -37,7 +37,13 @@ function createWindow() {
     pdfWindow.loadURL(`data:text/html;charset=utf-8,${encodeURI(data)}`);
     pdfWindow.webContents.on('did-finish-load', () => {
       pdfWindow.webContents.printToPDF({}).then((res) => {
-        fs.writeFileSync(path.join(__dirname, '../build/test.pdf'), res);
+        dialog
+          .showSaveDialog(win || null, {
+            defaultPath: './' + fileName
+          })
+          .then((file) => {
+            fs.writeFileSync(path.join(file.filePath), res);
+          });
       });
     });
   });
