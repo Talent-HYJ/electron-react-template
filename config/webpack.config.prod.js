@@ -5,7 +5,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const baseConfig = require('./webpack.config.base');
 const path = require('path');
 const webpack = require('webpack');
-const nodeExternals = require('webpack-node-externals');
 const WebpackBar = require('webpackbar');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -27,8 +26,7 @@ module.exports = merge(baseConfig, {
       }
     ]
   },
-  target: 'electron-renderer',
-  externals: [nodeExternals()],
+  target: 'web',
   plugins: [
     new Dotenv({
       path: path.resolve(__dirname, '../.env.production')

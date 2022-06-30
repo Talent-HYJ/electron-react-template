@@ -36,17 +36,6 @@ module.exports = merge(baseConfig, {
       template: path.resolve(__dirname, '../public/index.html')
     }),
     new WebpackBar({ name: '渲染进程' })
-    // new webpack.DllPlugin({
-    //   context: __dirname,
-    //   name: '[name]_[fullhash]',
-    //   path: path.join(__dirname, '../build/manifest.json'),
-    // }),
-    // new webpack.DllReferencePlugin({
-    //   context: __dirname,
-    //   manifest: require('../build/manifest.json'),
-    //   scope: 'xyz',
-    //   sourceType: 'commonjs2',
-    // })
   ],
   optimization: {
     runtimeChunk: true

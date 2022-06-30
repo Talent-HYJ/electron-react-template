@@ -8,14 +8,14 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(app.getAppPath(), 'preload.js'),
+      preload: path.join(__dirname, 'preload.js'),
       worldSafeExecuteJavaScript: true,
       nodeIntegration: true,
-      contextIsolation: true,
+      contextIsolation: false,
       webviewTag: true
     }
   });
-
+  console.log(path.join(__dirname, 'preload.js'), '需要的路径');
   isDev
     ? win.loadURL('http://localhost:9000')
     : win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`);

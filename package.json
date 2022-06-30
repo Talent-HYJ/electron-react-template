@@ -81,6 +81,7 @@
   "build": {
     "productName": "Electron React",
     "appId": "your.id",
+    "asar": false,
     "mac": {
       "category": "your.app.category.type",
       "icon": "build/favicon.png"
@@ -95,11 +96,10 @@
       "allowToChangeInstallationDirectory": true
     },
     "files": [
-      "electron/**",
       "build/**/*",
       "build_electron/**",
-      "./index.tsx",
-      "node_modules/**/*"
+      "!**/node_modules/**",
+      "node_modules/electron-is-dev/**"
     ],
     "directories": {
       "buildResources": "./public",

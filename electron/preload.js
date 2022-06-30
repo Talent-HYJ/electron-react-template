@@ -1,5 +1,5 @@
-const { contextBridge, ipcRenderer } = require('electron');
-contextBridge.exposeInMainWorld('api', {
+const { ipcRenderer } = require('electron');
+window.api = {
   createView: () => {
     ipcRenderer.send('create-view');
   },
@@ -7,4 +7,4 @@ contextBridge.exposeInMainWorld('api', {
     // data 传html字符串模板
     ipcRenderer.send('exportPDF', data, fileName);
   }
-});
+};

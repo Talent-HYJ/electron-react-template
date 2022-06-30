@@ -7,9 +7,6 @@ const app = () => {
   return (
     <div className={styles.app}>
       <TitleBar />
-      <div className={styles.content}>
-        <Nav />
-      </div>
     </div>
   );
 };
