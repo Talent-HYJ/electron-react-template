@@ -101,8 +101,8 @@ module.exports = {
       cache: true
     }),
     new MiniCssExtractPlugin({
-      filename: `assets/css/[name].[contenthash:8].css`,
-      chunkFilename: `assets/css/[name].[contenthash:8].chunk.css`, // chunk css file
+      filename: 'assets/css/[name].[contenthash:8].css',
+      chunkFilename: 'assets/css/[name].[contenthash:8].chunk.css', // chunk css file
       ignoreOrder: true
     }),
     new FriendlyErrorsWebpackPlugin()
