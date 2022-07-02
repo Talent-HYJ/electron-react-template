@@ -7,7 +7,6 @@ const WebpackBar = require('webpackbar');
 const webpack = require('webpack');
 module.exports = merge(baseConfig, {
   mode: 'development',
-  entry: ['react-hot-loader/patch', './index.tsx'],
   devServer: {
     static: {
       // directory: path.join(__dirname, '../public'),

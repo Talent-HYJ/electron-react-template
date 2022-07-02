@@ -2,7 +2,6 @@ const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugi
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const path = require('path');
-const lessModuleRegex = /\.module\.less$/;
 process.env.PUBLIC_URL = path.resolve(__dirname, '../public');
 module.exports = {
   entry: './index.tsx',
@@ -59,56 +58,31 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/i,
+        test: /\.(css|less)$/,
+        include: path.resolve(__dirname, '../src'),
         use: [
-          'style-loader',
-          'css-loader',
           {
-            loader: 'postcss-loader',
+            loader: MiniCssExtractPlugin.loader,
             options: {
-              postcssOptions: {
-                plugins: [
-                  require('autoprefixer')({
-                    overrideBrowserslist: [
-                      '> 1%',
-                      'last 7 versions',
-                      'not ie <= 8',
-                      'ios >= 8',
-                      'android >= 4.0'
-                    ]
-                  })
-                ]
-              }
+              esModule: false
             }
-          }
-        ]
-      },
-      {
-        test: /\.less$/i,
-        exclude: lessModuleRegex,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader'
           },
-          {
-            loader: 'less-loader'
-          }
-        ]
-      },
-      // less module
-      {
-        test: lessModuleRegex,
-        use: [
-          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
-              modules: true
+              importLoaders: 2,
+              modules: {
+                localIdentName: '[local]__[hash:base64:5]'
+              }
             }
           },
           {
-            loader: 'less-loader'
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                javascriptEnabled: true
+              }
+            }
           }
         ]
       },
