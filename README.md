@@ -2,8 +2,8 @@
 
 ### 技术架构
 
-electron16 + react17 + webpack5
-
+electron16 + react17 + webpack5 + typescript
+集成了eslint,stylelint,prettier,husky
 ### 目录解构
 
 ```bash
