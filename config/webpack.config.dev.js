@@ -4,6 +4,7 @@ const Dotenv = require('dotenv-webpack');
 const baseConfig = require('./webpack.config.base');
 const path = require('path');
 const WebpackBar = require('webpackbar');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const webpack = require('webpack');
 module.exports = merge(baseConfig, {
   mode: 'development',
@@ -34,6 +35,7 @@ module.exports = merge(baseConfig, {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html')
     }),
+    new ReactRefreshWebpackPlugin(),
     new WebpackBar({ name: '渲染进程' })
   ],
   optimization: {
