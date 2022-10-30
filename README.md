@@ -2,8 +2,8 @@
 
 ### 技术架构
 
-electron16 + react17 + webpack5 + typescript
-集成了eslint,stylelint,prettier,husky
+electron20 + react17 + webpack5 + typescript
+集成了eslint,stylelint,prettier,husky,jest
 ### 目录解构
 
 ```bash
@@ -46,4 +46,4 @@ electron16 + react17 + webpack5 + typescript
 - `npm run electron`: 开发环境启动 electron
 - `npm run pack`: 构建生产环境调试文件
 - `npm run dev:win64`: 构建生产 windows64 环境包
-- `npm run dev:macArm`: 构建生产 mac --arm 环境包
+- `npm run dev:mac`: 构建生产 mac --arm --x64 环境包

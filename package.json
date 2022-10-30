@@ -10,7 +10,8 @@
     "electron": "concurrently \"npm run start \" \"wait-on http://localhost:9000 && electron electron/main.js\"",
     "pack": "electron-builder --dir",
     "dev:win64": "npm run build && npm run build:electron && electron-builder --windows --x64",
-    "dev:macArm": "npm run build && npm run build:electron && electron-builder --mac --arm64",
+    "dev:mac": "npm run build && npm run build:electron && electron-builder --mac --arm64 --x64",
+    "test": "jest",
     "prepare": "husky install"
   },
   "author": "",
@@ -32,7 +33,9 @@
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "@typescript-eslint/parser": "^5.7.0",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.7",
     "autoprefixer": "^10.4.0",
+    "babel-jest": "^29.1.2",
     "babel-loader": "^8.2.3",
     "clean-webpack-plugin": "^4.0.0",
     "concurrently": "^6.5.0",
@@ -41,9 +44,10 @@
     "css-loader": "^6.5.1",
     "css-minimizer-webpack-plugin": "^3.3.0",
     "dotenv-webpack": "^7.0.3",
-    "electron": "^16.0.4",
+    "electron": "20.0.0",
     "electron-builder": "23.0.2",
     "electron-reloader": "^1.2.1",
+    "enzyme": "^3.11.0",
     "eslint": "^8.4.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-react-app": "^7.0.0",
@@ -54,6 +58,9 @@
     "eslint-webpack-plugin": "^3.1.1",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.1",
+    "jest-less-loader": "^0.1.2",
+    "jest-transform-stub": "^2.0.0",
+    "less": "4.1.1",
     "less-loader": "^10.0.1",
     "lint-staged": "^13.0.3",
     "mini-css-extract-plugin": "^2.4.5",
@@ -78,7 +85,6 @@
   },
   "dependencies": {
     "electron-is-dev": "^1.2.0",
-    "less": "4.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -96,10 +102,10 @@
   "build": {
     "productName": "Electron React",
     "appId": "your.id",
-    "asar": false,
+    "asar": true,
     "mac": {
       "category": "your.app.category.type",
-      "icon": "build/favicon.png"
+      "icon": "build/favicon.icns"
     },
     "win": {
       "icon": "build/favicon.png"
@@ -109,6 +115,27 @@
       "language": "2052",
       "deleteAppDataOnUninstall": true,
       "allowToChangeInstallationDirectory": true
+    },
+    "dmg": {
+      "icon": "build/favicon.icns",
+      "iconSize": 128,
+      "contents": [
+        {
+          "x": 380,
+          "y": 180,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 180,
+          "type": "file"
+        }
+      ],
+      "window": {
+        "width": 540,
+        "height": 380
+      }
     },
     "files": [
       "build/**/*",

@@ -1,2 +1,4 @@
 .eslintrc.js
 /config
+/electron
+jest.config.js

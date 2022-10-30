@@ -7,8 +7,7 @@ module.exports = {
     'react/jsx-uses-vars': 0,
     'react/react-in-jsx-scope': 0,
     'prettier/prettier': 'warn',
-
-    // 'no-unused-vars': 'off',
+    'no-unused-vars': 'off',
     // eqeqeq: 'error',
     // 'simple-import-sort/imports': 'error',
     // 'simple-import-sort/exports': 'error',
