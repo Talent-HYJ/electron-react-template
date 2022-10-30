@@ -1,7 +1,7 @@
 module.exports = {
-  extends: 'eslint:recommended',
+  extends: ['eslint:recommended', 'prettier'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react', 'react-hooks', '@typescript-eslint', 'prettier', 'simple-import-sort'],
+  plugins: ['prettier', 'react', 'react-hooks', '@typescript-eslint', 'simple-import-sort'],
   rules: {
     'react/jsx-uses-react': 0,
     'react/jsx-uses-vars': 0,
@@ -47,7 +47,7 @@ module.exports = {
     'spaced-comment': 'warn',
     'comma-spacing': 'error',
     'comma-style': 'error',
-    'comma-dangle': ['warn', 'always-multiline'],
+    'comma-dangle': 'warn',
     semi: 'error',
     'semi-spacing': 'error',
     'key-spacing': 'error',
