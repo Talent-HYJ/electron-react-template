@@ -5,7 +5,7 @@ const baseConfig = require('./webpack.config.base');
 const path = require('path');
 const WebpackBar = require('webpackbar');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const webpack = require('webpack');
+
 module.exports = merge(baseConfig, {
   mode: 'development',
   devServer: {

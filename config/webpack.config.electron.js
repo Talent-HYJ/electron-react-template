@@ -4,6 +4,7 @@ const WebpackBar = require('webpackbar');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 const baseConfig = require('./webpack.config.base');
+
 const path = require('path');
 module.exports = merge(baseConfig, {
   entry: './electron/main.js',

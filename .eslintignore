@@ -1,4 +1,6 @@
 .eslintrc.js
 /config
 /electron
+/scripts
 jest.config.js
+babel.config.js

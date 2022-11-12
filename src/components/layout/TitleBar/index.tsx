@@ -1,5 +1,5 @@
 import styles from './index.less';
-const Nav = () => {
+const Index = () => {
   return <div className={styles.menu_box}>菜单栏</div>;
 };
-export default Nav;
+export default Index;

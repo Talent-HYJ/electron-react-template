@@ -3,7 +3,7 @@ const isDev = require('electron-is-dev');
 const path = require('path');
 const fs = require('fs');
 function createWindow() {
-  console.log('创建主窗口    ');
+  console.log('创建主窗口');
   const win = new BrowserWindow({
     width: 800,
     height: 600,
@@ -15,7 +15,7 @@ function createWindow() {
       webviewTag: true
     }
   });
-  console.log(path.join(__dirname, 'preload.js'), '需要的路径');
+
   isDev
     ? win.loadURL('http://localhost:9000')
     : win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`);
@@ -51,7 +51,6 @@ function createWindow() {
 
 app.whenReady().then(() => {
   createWindow();
-
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();

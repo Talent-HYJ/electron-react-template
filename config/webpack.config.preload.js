@@ -1,7 +1,6 @@
 const { merge } = require('webpack-merge');
 const Dotenv = require('dotenv-webpack');
 const WebpackBar = require('webpackbar');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 const baseConfig = require('./webpack.config.base');
 const path = require('path');

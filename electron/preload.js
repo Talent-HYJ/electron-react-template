@@ -1,4 +1,5 @@
 const { ipcRenderer } = require('electron');
+require('bytenode');
 window.api = {
   createView: () => {
     ipcRenderer.send('create-view');

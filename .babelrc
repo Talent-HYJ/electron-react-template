@@ -1,4 +1,0 @@
-{
-  "plugins": ["@babel/plugin-transform-runtime","@babel/plugin-syntax-jsx","@babel/proposal-class-properties",
-    "@babel/proposal-object-rest-spread","react-refresh/babel"]
-}
