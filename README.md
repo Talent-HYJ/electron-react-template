@@ -1,10 +1,10 @@
 #### electron-react-template
 
-### 技术架构
+##### 技术架构
 
 electron20 + react17 + webpack5 + typescript
 集成了eslint,stylelint,prettier,husky,jest
-### 目录解构
+##### 目录解构
 
 ```bash
 ├── build   # 渲染进程构建目录
@@ -40,13 +40,13 @@ electron20 + react17 + webpack5 + typescript
 └── tsconfig.json #ts配置文件
 ```
 
-### 命令
+##### 命令
 
-- `npm run start`: web 端启动
-- `npm run build`: 渲染进程构建
-- `npm run build:electron`: 主进程构建
-- `npm run byte`: 主进程文件进行加密
-- `npm run electron`: 开发环境启动 electron
-- `npm run pack`: 构建生产环境调试文件
-- `npm run dev:win64`: 构建生产 windows64 环境包
-- `npm run dev:mac`: 构建生产 mac --arm --x64 环境包
+- `pnpm run start`: web 端启动
+- `pnpm run build`: 渲染进程构建
+- `pnpm run build:electron`: 主进程构建
+- `pnpm run byte`: 主进程文件进行加密
+- `pnpm run electron`: 开发环境启动 electron
+- `pnpm run pack`: 构建生产环境调试文件
+- `pnpm run dev:win64`: 构建生产 windows64 环境包
+- `pnpm run dev:mac`: 构建生产 mac --arm --x64 环境包
