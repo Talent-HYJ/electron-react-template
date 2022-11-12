@@ -14,10 +14,12 @@ electron20 + react17 + webpack5 + typescript
 ├── config # webpack 配置文件目录
 │   ├── webpack.config.base.js
 │   ├── webpack.config.electron.js # electron主进程生产环境打包配置
+│   ├── webpack.config.preload.js # preload打包配置
 │   ├── webpack.config.dev.js # 渲染进程开发环境打包配置
 │   └── webpack.config.prod.js # 渲染进程生产环境打包配置
 ├── electron # electron相关文件
-│   ├── main.js # electron入口文件
+│   ├── index # electron入口文件
+│   ├── main.js # electron主进程文件
 │   └── preload.js # electron预加载文件
 ├── index.less
 ├── index.tsx
@@ -43,6 +45,7 @@ electron20 + react17 + webpack5 + typescript
 - `npm run start`: web 端启动
 - `npm run build`: 渲染进程构建
 - `npm run build:electron`: 主进程构建
+- `npm run byte`: 主进程文件进行加密
 - `npm run electron`: 开发环境启动 electron
 - `npm run pack`: 构建生产环境调试文件
 - `npm run dev:win64`: 构建生产 windows64 环境包
