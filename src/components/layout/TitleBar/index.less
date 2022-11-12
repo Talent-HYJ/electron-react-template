@@ -1,6 +1,26 @@
 .menu_box {
+    display: flex;
     width: 100vw;
     height: 30px;
+    align-items: center;
+    -webkit-app-region: drag;
     background-color: #ebebeb;
     text-align: center;
+
+    .menu_content {
+        flex: 1;
+    }
+
+    .window_menus {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        margin-right: 12px;
+
+        img {
+            margin-left: 12px;
+            -webkit-app-region: no-drag;
+            cursor: pointer;
+        }
+    }
 }

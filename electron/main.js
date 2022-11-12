@@ -7,6 +7,9 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    titleBarStyle: 'hiddenInset',
+    frame: false,
+    trafficLightPosition: { x: 10, y: 7 },
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       worldSafeExecuteJavaScript: true,
@@ -15,11 +18,31 @@ function createWindow() {
       webviewTag: true
     }
   });
-
+  win.on('close', () => {
+    console.log('关闭');
+    win.minimize();
+  });
   isDev
     ? win.loadURL('http://localhost:9000')
     : win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`);
   win.webContents.openDevTools();
+  ipcMain.on('operateWindow', (e, type) => {
+    switch (type) {
+      case 'minimize':
+        BrowserWindow.getFocusedWindow().minimize();
+        break;
+      case 'maximize':
+        if (BrowserWindow.getFocusedWindow().isMaximized()) {
+          BrowserWindow.getFocusedWindow().unmaximize();
+        } else {
+          BrowserWindow.getFocusedWindow().maximize();
+        }
+        break;
+      case 'close':
+        BrowserWindow.getFocusedWindow().close();
+        break;
+    }
+  });
   ipcMain.on('exportPDF', (e, data, fileName = '未命名.pdf') => {
     // 导出pdf方法
     const pdfWindow = new BrowserWindow({
@@ -50,6 +73,7 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+  require('@electron/remote/main').initialize();
   createWindow();
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -57,7 +81,9 @@ app.whenReady().then(() => {
     }
   });
 });
-
+app.on('web-contents-created', (e, webContents) => {
+  require('@electron/remote/main').enable(webContents);
+});
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
