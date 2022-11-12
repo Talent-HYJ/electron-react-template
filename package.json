@@ -16,6 +16,7 @@
     "prepare": "husky install"
   },
   "author": "hyj",
+  "repository": "https://github.com/Talent-HYJ/electron-react-template.git",
   "packageManager": "pnpm@7.15.0",
   "keywords": [
     "electron",
