@@ -8,6 +8,8 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     'prettier/prettier': 'warn',
     'no-unused-vars': 'off',
+    // https://github.com/typescript-eslint/typescript-eslint/issues/2528#issuecomment-689369395
+    'no-undef': 0,
     // eqeqeq: 'error',
     // 'simple-import-sort/imports': 'error',
     // 'simple-import-sort/exports': 'error',
@@ -91,6 +93,10 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'off',
     'no-console': 'off',
     // import-sort, see: https://dev.to/julioxavierr/sorting-your-imports-with-eslint-3ped
-    'simple-import-sort/imports': 'warn'
+    'simple-import-sort/imports': 'warn',
+    'react/jsx-max-props-per-line': 0
+  },
+  env: {
+    browser: true
   }
 };

@@ -9,6 +9,7 @@ const WebpackBar = require('webpackbar');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = merge(baseConfig, {
   mode: 'production',
   performance: {
@@ -18,11 +19,33 @@ module.exports = merge(baseConfig, {
   module: {
     rules: [
       {
-        test: /\.(jpg|png|gif|bmp|jpeg|ico)$/,
-        use: ['url-loader'],
-        generator: {
-          filename: 'static/[name].[ext]'
-        }
+        test: /\.(css|less)$/,
+        include: path.resolve(__dirname, '../src'),
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              esModule: false
+            }
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2,
+              modules: {
+                localIdentName: '[local]__[hash:base64:5]'
+              }
+            }
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                javascriptEnabled: true
+              }
+            }
+          }
+        ]
       }
     ]
   },
@@ -54,6 +77,11 @@ module.exports = merge(baseConfig, {
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../public/index.html')
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'assets/css/[name].[contenthash:8].css',
+      chunkFilename: 'assets/css/[name].[contenthash:8].chunk.css', // chunk css file
+      ignoreOrder: true
     }),
     new webpack.IgnorePlugin({
       resourceRegExp: new RegExp('^(fs|ipc|path)$')

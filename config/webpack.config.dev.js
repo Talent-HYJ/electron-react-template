@@ -30,6 +30,39 @@ module.exports = merge(baseConfig, {
       config: [__filename]
     }
   },
+  module: {
+    rules: [
+      {
+        test: /\.(css|less)$/,
+        include: path.resolve(__dirname, '../src'),
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              esModule: false
+            }
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2,
+              modules: {
+                localIdentName: '[local]__[hash:base64:5]'
+              }
+            }
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                javascriptEnabled: true
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
   plugins: [
     new Dotenv(),
     new HtmlWebpackPlugin({

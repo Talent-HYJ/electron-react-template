@@ -1,5 +1,4 @@
 const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const path = require('path');
 process.env.PUBLIC_URL = path.resolve(__dirname, '../public');
@@ -16,6 +15,7 @@ module.exports = {
     mainFields: ['jsnext:main', 'module', 'browser', 'main'],
     extensions: ['.ts', '.tsx', '.js', '.json', '.less', '.css'],
     alias: {
+      '@': path.resolve(__dirname, '../src'),
       Images: path.resolve(__dirname, '../src/images'),
       Utils: path.resolve(__dirname, '../src/utils')
     }
@@ -58,36 +58,7 @@ module.exports = {
         }
       },
       {
-        test: /\.(css|less)$/,
-        include: path.resolve(__dirname, '../src'),
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              esModule: false
-            }
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2,
-              modules: {
-                localIdentName: '[local]__[hash:base64:5]'
-              }
-            }
-          },
-          {
-            loader: 'less-loader',
-            options: {
-              lessOptions: {
-                javascriptEnabled: true
-              }
-            }
-          }
-        ]
-      },
-      {
-        test: /\.(jpg|png|gif|bmp|jpeg|ico)$/,
+        test: /\.(jpg|png|gif|bmp|jpeg|ico|svg)$/,
         use: ['url-loader'],
         generator: {
           filename: 'static/[name].[ext]'
@@ -99,11 +70,6 @@ module.exports = {
     new ESLintPlugin({
       fix: true,
       cache: true
-    }),
-    new MiniCssExtractPlugin({
-      filename: 'assets/css/[name].[contenthash:8].css',
-      chunkFilename: 'assets/css/[name].[contenthash:8].chunk.css', // chunk css file
-      ignoreOrder: true
     }),
     new FriendlyErrorsWebpackPlugin()
   ]
