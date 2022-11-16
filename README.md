@@ -3,7 +3,7 @@
 ##### 技术架构
 
 electron20 + react17 + webpack5 + typescript
-集成了eslint,stylelint,prettier,husky,jest
+集成了eslint,stylelint,husky,jest
 ##### 目录解构
 
 ```bash

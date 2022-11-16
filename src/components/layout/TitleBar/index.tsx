@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import closeIcon from '@/images/window/close.svg';
-import max from '@/images/window/max.svg';
-import unMax from '@/images/window/middle.svg';
-import min from '@/images/window/min.svg';
+import styles from "./index.less";
+import closeIcon from "@/images/window/close.svg";
+import max from "@/images/window/max.svg";
+import unMax from "@/images/window/middle.svg";
+import min from "@/images/window/min.svg";
 
-import styles from './index.less';
 const Index = () => {
   const [isMax, setIsMax] = useState(false);
-  const isMac = process.platform === 'darwin';
+  const isMac = process.platform === "darwin";
   const handleWindow = (type: WindowOperateType) => {
     window.api.operateWindow(type);
   };
@@ -20,14 +20,14 @@ const Index = () => {
       <div className={styles.menu_content}>菜单栏</div>
       {!isMac && (
         <div className={styles.window_menus}>
-          <img src={min} alt="min" width={16} onClick={() => handleWindow('minimize')} />
+          <img src={min} alt="min" width={16} onClick={() => handleWindow("minimize")} />
           <img
             src={isMax ? unMax : max}
             alt="max"
             width={16}
-            onClick={() => handleWindow('maximize')}
+            onClick={() => handleWindow("maximize")}
           />
-          <img src={closeIcon} alt="max" width={16} onClick={() => handleWindow('close')} />
+          <img src={closeIcon} alt="max" width={16} onClick={() => handleWindow("close")} />
         </div>
       )}
     </div>

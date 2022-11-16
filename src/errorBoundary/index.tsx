@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 class ErrorBoundary extends React.Component {
   state: { hasError: boolean; error: null | Error; info: null | React.ErrorInfo };
@@ -7,16 +7,18 @@ class ErrorBoundary extends React.Component {
     this.state = {
       hasError: false,
       error: null,
-      info: null
+      info: null,
     };
   }
+
   componentDidCatch(error: Error, info: React.ErrorInfo) {
     this.setState({
       hasError: true,
-      error: error,
-      info: info
+      error,
+      info,
     });
   }
+
   render() {
     if (this.state.hasError) {
       return <h1>Something went wrong.</h1>;
