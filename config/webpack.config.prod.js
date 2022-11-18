@@ -19,7 +19,7 @@ module.exports = merge(baseConfig, {
   module: {
     rules: [
       {
-        test: /\.(css|less)$/,
+        test: /\.(less)$/,
         include: path.resolve(__dirname, '../src'),
         use: [
           {
@@ -46,7 +46,18 @@ module.exports = merge(baseConfig, {
             }
           }
         ]
-      }
+      },
+      {
+        test: /\.(css)$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
+          },
+        ]
+      },
     ]
   },
   target: 'web',
